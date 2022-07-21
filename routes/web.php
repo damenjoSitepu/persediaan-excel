@@ -19,3 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('/', [Tutorial::class, 'index'])->name('tutorial');
+Route::post('/import', [Tutorial::class, 'import'])->name('import');
+Route::get('/export', [Tutorial::class, 'export'])->name('export');
