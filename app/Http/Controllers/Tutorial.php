@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Exports\ProductExport;
 use App\Imports\ProductImport;
 use App\Models\Product;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -25,7 +27,28 @@ class Tutorial extends Controller
     // Qr code
     public function qrcode()
     {
-        
+        $data = [
+            'title' => 'Qr Code'
+        ];
+
+        // DOMPDF
+
+        $pdf = new Dompdf();
+        $options = new Options();
+        $options->set('defaultFont', 'Courier');
+        $options->set('isRemoteEnabled', TRUE);
+        $options->set('debugKeepTemp', TRUE);
+        $options->set('isHtml5ParserEnabled', true);
+        // $options->set('chroot', base_url('assets/img/'));
+        $pdf = new Dompdf($options);
+
+        $pdf = new Dompdf();
+
+        $pdf->loadHtml(view('tutorial/qrcode', $data));
+        $pdf->setPaper('A4', 'landscape');
+
+        $pdf->render();
+        $pdf->stream(hash('ripemd160', 'Data-Product'), array("Attachment" => false));
     }
 
     public function export()

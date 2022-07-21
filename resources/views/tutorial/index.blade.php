@@ -56,6 +56,7 @@
     
         <button class="mt-3 btn btn-primary"><i class="fas fa-cogs"></i> Import File</button>
         <a href="{{ route('export') }}" class="mt-3 btn btn-success"><i class='fas fa-file'></i> Download Produk</a>
+        <a href="{{ route('qrcode') }}" class="mt-3 btn btn-danger"><i class='fas fa-shop'></i> Download Qr Code</a>
     </form>
 
     <div class="card text-center my-5">
@@ -65,7 +66,7 @@
       <div class="card-body">
           {!! QrCode::size(300)->generate('Suzume No Tojimari') !!}
       </div>
-  </div>
+    </div>
 
     <table class="table w-75 m-auto text-center mt-5">
         <thead>
